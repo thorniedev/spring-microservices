@@ -1,10 +1,8 @@
-package kh.edu.istad.platform.persistance.enity;
+package kh.edu.istad.platform.customer.persistance.enity;
 
 import jakarta.persistence.*;
 import kh.edu.istad.platform.customer.valueobject.CustomerStatus;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 

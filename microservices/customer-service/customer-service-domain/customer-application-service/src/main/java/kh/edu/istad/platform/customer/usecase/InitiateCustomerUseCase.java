@@ -27,8 +27,24 @@ public class InitiateCustomerUseCase
         // invoke domain logic (call domain service)
         // customerDomainService.initiateCustomer()
         // sava data to database (output port)
-
         // customerRepository.save();
-        return new InitiateCustomerResult(UUID.randomUUID());
+
+        // Build Domain Entity from command
+        Customer customer = Customer.Builder.builder()
+                .username(command.username())
+                .familyName(command.familyName())
+                .givenName(command.givenName())
+                .email(command.email())
+                .phoneNumber(command.phoneNumber())
+                .build();
+
+        // Invoke domain logic (Validates, generates UUID, sets status to ACTIVE)
+        customerDomainService.initiateCustomer(customer);
+
+        // save to database through outbound port (Persistence adapter)
+        Customer savedCustomer = customerRepository.save(customer);
+
+        // return result with generated customer ID
+        return new InitiateCustomerResult(savedCustomer.getId().value());
     }
 }
