@@ -1,0 +1,7 @@
+
+// microservices/customer-service/settings.gradle
+
+rootProject.name = 'microservices'
+
+includeBuild 'business-service'
+includeBuild 'customer-service'

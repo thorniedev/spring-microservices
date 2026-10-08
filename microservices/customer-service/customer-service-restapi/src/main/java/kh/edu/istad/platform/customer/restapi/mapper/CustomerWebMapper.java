@@ -1,0 +1,15 @@
+package kh.edu.istad.platform.customer.restapi.mapper;
+
+import kh.edu.istad.platform.customer.dto.InitiateCustomerCommand;
+import kh.edu.istad.platform.customer.dto.InitiateCustomerResult;
+import kh.edu.istad.platform.customer.restapi.dto.CustomerInitiateRequest;
+import kh.edu.istad.platform.customer.restapi.dto.CustomerInitiateResponse;
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+public interface CustomerWebMapper
+{
+    InitiateCustomerCommand toCommand(CustomerInitiateRequest request);
+
+    CustomerInitiateResponse toResponse(InitiateCustomerResult result);
+}

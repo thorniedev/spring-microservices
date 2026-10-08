@@ -1,0 +1,28 @@
+//rootProject.name = 'spring-microservices'
+//include 'microservices'
+//include 'istad-common'
+//include 'istad-common:istad-common-domain'
+//include 'istad-common:istad-common-restapi'
+//include 'microservices:business-service'
+//include 'microservices:customer-service'
+//include 'build-logic'
+
+
+rootProject.name = 'spring-microservices'
+
+includeBuild 'istad-common'
+includeBuild 'microservices'
+
+
+
+include 'infrastructure'
+include 'infrastructure:config-server'
+include 'infrastructure:api-gateway'
+
+//include 'microservices:customer-service:customer-service-domain'
+//include 'microservices:customer-service:customer-service-domain:customer-domain-core'
+//include 'microservices:customer-service:customer-service-domain:customer-application-service'
+//include 'microservices:customer-service:customer-service-restapi'
+//include 'microservices:customer-service:customer-service-persistance'
+//include 'microservices:customer-service:customer-service-message'
+//include 'microservices:customer-service:customer-service-main'

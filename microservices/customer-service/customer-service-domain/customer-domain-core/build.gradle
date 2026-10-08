@@ -1,0 +1,21 @@
+plugins {
+    id 'java-common-conventions'
+}
+
+dependencies {
+    // implementation // last implement can not call to sub-project
+    // if you want to inherit to sub-project using api ''.
+    // api project('istad-common:istad-common-domain')
+
+    //api 'com.microservices.ite:istad-common-domain'
+    api 'kh.edu.istad:istad-common-domain'
+    // need to add group 'com.microservices.ite'
+}
+
+
+//### 'group:artifact' — resolved via dependency substitution
+//• api 'com.microservices.ite:istad-common-domain' tells Gradle: "I need this dependency by its GAV coordinates."
+//• Gradle then checks: "Do any of my includeBuild projects match group=com.microservices.ite and name=istad-common-domain?"
+//• It finds a match in the istad-common included build (which has group = 'com.microservices.ite' and a subproject named istad-common-domain).
+//• Gradle automatically substitutes the external dependency with the local project source code — so it builds from source, just like project() would,
+//but through the correct composite build mechanism.

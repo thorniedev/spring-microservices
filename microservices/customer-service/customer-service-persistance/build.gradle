@@ -1,0 +1,11 @@
+plugins {
+    id 'spring-common-conventions'
+}
+
+dependencies {
+    api 'kh.edu.istad:customer-application-service'
+
+    runtimeOnly 'com.h2database:h2' // DB for test, this will move to Postgres letter.
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+}
