@@ -16,6 +16,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class InitiateCustomerUseCase
 {
+    // Spring will automatically inject whichever adapter is active (JPA or Mongo)!
+
     private final CustomerDomainService customerDomainService;
     private final CustomerRepository customerRepository; // dependency point inward (D principle)
 
@@ -45,6 +47,13 @@ public class InitiateCustomerUseCase
         Customer savedCustomer = customerRepository.save(customer);
 
         // return result with generated customer ID
-        return new InitiateCustomerResult(savedCustomer.getId().value());
+        return new InitiateCustomerResult(
+                savedCustomer.getId().value(),
+                savedCustomer.getUsername(),
+                savedCustomer.getFamilyName(),
+                savedCustomer.getGivenName(),
+                savedCustomer.getEmail(),
+                savedCustomer.getPhoneNumber()
+                );
     }
 }

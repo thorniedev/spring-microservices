@@ -142,4 +142,7 @@ public class Customer extends AggreateRoot<CustomerId>
     }
 
 
+    public static Builder builder() {
+        return Builder.builder();
+    }
 }

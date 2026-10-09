@@ -1,21 +1,18 @@
-package kh.edu.istad.platform.customer.persistance.enity;
+package kh.edu.istad.platform.customer.persistance.document;
 
+import kh.edu.istad.common.domain.valueobject.CustomerId;
 import kh.edu.istad.platform.customer.valueobject.CustomerStatus;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
-
-import java.util.UUID;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@Table("customers")
-public class CustomerEntity {
-
+@Document(collection = "customers")
+public class CustomerDocument {
     @Id
-    private UUID customerId;
+    private CustomerId id;
 
     private String username;
 

@@ -1,11 +1,20 @@
 plugins {
-    id 'spring-common-conventions'
+   id 'spring-common-conventions'
 }
 
 dependencies {
+
     api 'kh.edu.istad:customer-application-service'
 
-    runtimeOnly 'com.h2database:h2' // DB for test, this will move to Postgres letter.
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+
+    //runtimeOnly 'com.h2database:h2' // DB for test, this will move to Postgres letter.
+    //runtimeOnly 'org.postgresql:postgresql'
+    //implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // reactive postgres
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    runtimeOnly 'org.postgresql:r2dbc-postgresql'
 }

@@ -6,26 +6,25 @@ import kh.edu.istad.platform.customer.persistance.enity.CustomerEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.UUID;
+
 @Mapper(componentModel = "spring")
 public interface CustomerPersistenceMapper {
 
     // Map Domain Customer => JPA CustomerEntity
-    @Mapping(target = "customerId", source = "id.value")
+    @Mapping(target = "customerId", source = "id")
     CustomerEntity toEntity(Customer customer);
 
-    // Default method to build the Domain Entity using its Builder
-    default Customer toDomain(CustomerEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-        return Customer.Builder.builder()
-                .id(entity.getCustomerId() != null ? new CustomerId(entity.getCustomerId()) : null)
-                .username(entity.getUsername())
-                .familyName(entity.getFamilyName())
-                .givenName(entity.getGivenName())
-                .email(entity.getEmail())
-                .phoneNumber(entity.getPhoneNumber())
-                .status(entity.getStatus())
-                .build();
+    // JPA CustomerEntity => Domain Customer
+    @Mapping(target = "id", source = "customerId")
+    Customer toDomain(CustomerEntity customerEntity);
+
+    // Type conversion for CustomerId <=> UUID
+    default CustomerId toCustomerId(UUID value){
+        return value != null ? new CustomerId(value) : null;
+    }
+
+    default UUID toUuid(CustomerId id) {
+        return id != null ? id.value() : null;
     }
 }
