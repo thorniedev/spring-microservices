@@ -1,7 +1,0 @@
-plugins {
-    id 'spring-cloud-conventions'
-}
-
-dependencies {
-    implementation libs.spring.cloud.gateway
-}
