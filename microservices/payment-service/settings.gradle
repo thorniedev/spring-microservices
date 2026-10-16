@@ -1,0 +1,28 @@
+pluginManagement {
+    includeBuild('../../build-logic')
+
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+    versionCatalogs {
+        libs {
+            from(files("../../gradle/libs.versions.toml"))
+        }
+    }
+}
+
+rootProject.name = 'payment-service'
+
+include 'payment-service-main'
+include 'payment-service-restapi'
+include 'payment-service-persistence'
+// Hierarchical submodules
+include 'payment-service-domain:payment-domain-core'
+include 'payment-service-domain:payment-application-service'

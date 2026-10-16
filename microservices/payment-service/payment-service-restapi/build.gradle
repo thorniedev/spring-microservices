@@ -1,0 +1,35 @@
+plugins {
+    id 'spring-common-conventions'
+}
+
+dependencies {
+    api 'kh.edu.istad:payment-application-service'
+    api 'kh.edu.istad:istad-common-restapi'
+
+    implementation libs.spring.boot.starter.webmvc
+    implementation libs.spring.boot.starter.validation
+    testImplementation libs.spring.boot.starter.webmvc.test
+}
+
+
+
+//plugins {
+//    id 'java'
+//}
+//
+//group = 'com.microservices.ite'
+//version = 'unspecified'
+//
+//repositories {
+//    mavenCentral()
+//}
+//
+//dependencies {
+//    testImplementation platform('org.junit:junit-bom:6.0.0')
+//    testImplementation 'org.junit.jupiter:junit-jupiter'
+//    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+//}
+//
+//test {
+//    useJUnitPlatform()
+//}

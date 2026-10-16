@@ -1,0 +1,24 @@
+package kh.edu.istad.platform.payment.entity;
+
+import kh.edu.istad.common.domain.entity.BaseEntity;
+import kh.edu.istad.common.domain.valueobject.CustomerId;
+import kh.edu.istad.common.domain.valueobject.Money;
+import kh.edu.istad.platform.payment.valueobject.CreditHistoryId;
+import kh.edu.istad.platform.payment.valueobject.TransactionType;
+
+public class CreditHistory extends BaseEntity<CreditHistoryId> {
+    private final CustomerId customerId;
+    private final Money amount;
+    private final TransactionType transactionType;
+
+    public CreditHistory(CreditHistoryId creditHistoryId, CustomerId customerId, Money amount, TransactionType transactionType) {
+        super.setId(creditHistoryId);
+        this.customerId = customerId;
+        this.amount = amount;
+        this.transactionType = transactionType;
+    }
+
+    public CustomerId getCustomerId() { return customerId; }
+    public Money getAmount() { return amount; }
+    public TransactionType getTransactionType() { return transactionType; }
+}

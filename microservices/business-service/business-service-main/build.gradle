@@ -1,0 +1,16 @@
+plugins {
+    id 'spring-boot-common-conventions'
+}
+
+dependencies {
+    implementation 'kh.edu.istad:business-domain-core'
+    implementation 'kh.edu.istad:business-application-service'
+    implementation 'kh.edu.istad:business-service-persistence'
+    implementation 'kh.edu.istad:business-service-restapi'
+    implementation 'kh.edu.istad:istad-common-restapi'
+
+    implementation libs.spring.starter.webflux
+    implementation libs.spring.boot.starter.data.mongodb.reactive
+    testImplementation libs.spring.boot.starter.webflux.test
+    testRuntimeOnly libs.junit.platform.launcher
+}

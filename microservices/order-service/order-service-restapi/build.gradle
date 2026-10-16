@@ -1,0 +1,11 @@
+plugins {
+    id 'spring-common-conventions'
+}
+
+dependencies {
+    api 'kh.edu.istad:order-application-service'
+    api 'kh.edu.istad:istad-common-restapi'
+    implementation libs.spring.boot.starter.webmvc
+    implementation libs.spring.boot.starter.validation
+    testImplementation libs.spring.boot.starter.webmvc.test
+}

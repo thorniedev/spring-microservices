@@ -1,0 +1,15 @@
+plugins {
+   id 'spring-common-conventions'
+}
+
+dependencies {
+
+    api 'kh.edu.istad:customer-application-service'
+
+    // reactive mongo
+    implementation libs.spring.boot.starter.data.mongodb.reactive
+
+    // reactive postgres
+    implementation libs.spring.boot.starter.data.r2dbc
+    runtimeOnly libs.postgresql.r2dbc
+}

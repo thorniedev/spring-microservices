@@ -1,7 +1,16 @@
 plugins {
-    id 'java-common-conventions'
+    // id 'java-common-conventions'
+    id 'spring-common-conventions'
 }
 
 dependencies {
 
+    api project(':istad-common-domain')
+
+    // Provides @RestControllerAdvice, @ExceptionHandler, and WebExchangeBindException
+    compileOnly libs.spring.boot.starter.webmvc
+
+    compileOnly libs.spring.boot.starter.validation
+
+    implementation 'io.projectreactor:reactor-core'
 }

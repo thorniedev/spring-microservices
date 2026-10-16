@@ -1,0 +1,26 @@
+plugins {
+    id 'java-common-conventions'
+    id 'io.spring.dependency-management'
+}
+
+def libs = project.extensions.getByType(VersionCatalogsExtension).named("libs")
+
+dependencyManagement {
+    imports {
+        mavenBom libs.findLibrary('spring-boot3-bom') // 1. Returns Optional<Provider<Dependency>>
+                .get()    // 2. Unwraps Optional -> Provider<Dependency>
+                .get()    // 3. Unwraps Provider -> MinimalExternalModuleDependency
+                .toString()  // 4. Converts to "org.springframework.boot:spring-boot-dependencies:3.3.4"
+        mavenBom libs.findLibrary('spring-cloud-bom').get().get().toString()
+    }
+}
+
+dependencies {
+
+    libs.findBundle('spring-base').get().get().forEach {d ->
+        implementation d
+    }
+    // OR way 2
+    //implementation libs.findLibrary('spring-boot-starter-logging').get().get()
+    //implementation libs.findLibrary('spring-boot-starter-actuator').get().get()
+}

@@ -1,9 +1,9 @@
-plugins {
-    id 'spring-boot-common-conventions'
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
+//plugins {
+//    id 'spring-boot-common-conventions'
+//}
+//
+//dependencies {
+//    implementation libs.spring.boot.starter.webmvc
+//    testImplementation libs.spring.boot.starter.webmvc.test
+//    testImplementation libs.junit.platform.launcher
+//}

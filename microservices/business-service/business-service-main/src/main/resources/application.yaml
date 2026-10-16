@@ -1,0 +1,20 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: business-service
+  data:
+    mongodb:
+      uri: mongodb://mongo:admin@localhost:27018/db_business?authSource=admin
+      uuid-representation: standard
+  mongodb:
+    uri: mongodb://mongo:admin@localhost:27018/db_business?authSource=admin
+    host: localhost
+    port: 27018
+    username: mongo
+    password: admin
+    database: db_business
+    authentication-database: admin
+    representation:
+      uuid: standard
