@@ -3,6 +3,8 @@ plugins {
     id 'io.spring.dependency-management'
 }
 
+def libs = project.extensions.getByType(VersionCatalogsExtension).named("libs")
+
 group = 'kh.edu.istad'
 version = '1.0.0'
 
@@ -14,23 +16,27 @@ java {
 
 dependencyManagement {
     imports {
-        mavenBom 'org.springframework.boot:spring-boot-dependencies:4.1.1'
+        // mavenBom 'org.springframework.boot:spring-boot-dependencies:4.1.1'
+        mavenBom libs.findLibrary('spring-boot4-bom').get().get().toString()
     }
 }
 
 dependencies {
 
-    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
-    compileOnly 'org.mapstruct:mapstruct:1.6.3'
+    // Mapstruct
+    annotationProcessor libs.findLibrary('mapstruct-processor').get().get()
+    annotationProcessor libs.findLibrary('mapstruct-annotation-processor').get().get()
+    compileOnly libs.findLibrary('mapstruct').get().get()
 
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    // Lombok
+    compileOnly libs.findLibrary('lombok').get().get()
+    annotationProcessor libs.findLibrary('lombok').get().get()
 
-    implementation 'org.springframework.boot:spring-boot-starter-logging'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    libs.findBundle('spring-base').get().get().forEach {dep ->
+        implementation dep
+    }
 
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation libs.findLibrary('spring-boot-starter-test').get().get()
 }
 
 tasks.withType(Test).configureEach {

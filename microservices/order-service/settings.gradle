@@ -1,0 +1,29 @@
+pluginManagement {
+    includeBuild('../../build-logic')
+
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+    versionCatalogs {
+        libs {
+            from(files("../../gradle/libs.versions.toml"))
+        }
+    }
+}
+
+rootProject.name = 'order-service'
+
+include 'order-service-main'
+include 'order-service-restapi'
+include 'order-service-persistence'
+
+// Hierarchical submodules
+include 'order-service-domain:order-domain-core'
+include 'order-service-domain:order-application-service'

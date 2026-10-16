@@ -1,0 +1,12 @@
+plugins {
+    id 'spring-common-conventions'
+}
+
+dependencies {
+    api 'kh.edu.istad:business-domain-core'
+
+    // WebFlux and Reactor support
+    implementation libs.spring.starter.webflux
+    implementation libs.spring.boot.starter.validation
+
+}

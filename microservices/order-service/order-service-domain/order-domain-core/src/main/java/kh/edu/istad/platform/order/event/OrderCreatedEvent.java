@@ -1,0 +1,12 @@
+package kh.edu.istad.platform.order.event;
+
+import kh.edu.istad.common.domain.event.DomainEvent;
+import kh.edu.istad.platform.order.entity.Order;
+
+import java.time.ZonedDateTime;
+
+public record OrderCreatedEvent (
+        Order order,
+        ZonedDateTime createdAt
+) implements DomainEvent<Order> {
+}

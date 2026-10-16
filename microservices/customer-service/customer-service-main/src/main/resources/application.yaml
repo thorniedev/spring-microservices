@@ -1,7 +1,6 @@
 server:
   port: 8092
 
-
 # Database Toggle
 persistence:
     db-type: mongo
@@ -10,11 +9,12 @@ spring:
   application:
     name: customer-service
   mongodb:
+    uri: mongodb://mongo:admin@localhost:27018/db_customer?authSource=admin
     host: localhost
     port: 27018
     username: mongo
     password: admin
-    database: db_customer
+    database: db_customer # Auto create when not exists
     authentication-database: admin
     representation: # MongoDB BSON needs to know what binary format to use when storing Java UUIDs
       uuid: standard
@@ -23,6 +23,9 @@ spring:
     url: r2dbc:postgresql://localhost:5432/app_db
     username: admin
     password: postgres@123456789
+
+
+
 
 
 #  datasource:

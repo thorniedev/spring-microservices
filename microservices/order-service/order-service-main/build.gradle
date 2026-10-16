@@ -1,0 +1,15 @@
+plugins {
+    id 'spring-boot-common-conventions'
+}
+
+dependencies {
+    implementation 'kh.edu.istad:order-domain-core'
+    implementation 'kh.edu.istad:order-application-service'
+    implementation 'kh.edu.istad:order-service-persistence'
+    implementation 'kh.edu.istad:order-service-restapi'
+    implementation 'kh.edu.istad:istad-common-restapi'
+
+    implementation libs.spring.boot.starter.webmvc
+    testImplementation libs.spring.boot.starter.webmvc.test
+    testRuntimeOnly libs.junit.platform.launcher
+}

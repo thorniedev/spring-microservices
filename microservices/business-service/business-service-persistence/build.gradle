@@ -1,0 +1,10 @@
+plugins {
+    id 'spring-common-conventions'
+}
+
+dependencies {
+    api 'kh.edu.istad:business-application-service'
+
+    // Step #2: Spring Data Reactive MongoDB
+    implementation libs.spring.boot.starter.data.mongodb.reactive
+}
