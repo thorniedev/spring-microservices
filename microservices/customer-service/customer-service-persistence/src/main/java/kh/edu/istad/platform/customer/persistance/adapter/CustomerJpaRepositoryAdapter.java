@@ -10,6 +10,7 @@ import kh.edu.istad.platform.customer.persistance.mapper.CustomerPersistenceMapp
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 @Repository
 @ConditionalOnProperty(name= "persistence.db-type", havingValue = "postgres", matchIfMissing = true)
@@ -24,5 +25,10 @@ public class CustomerJpaRepositoryAdapter implements CustomerRepository {
         CustomerEntity customerEntity = customerPersistenceMapper.toEntity(customer);
         CustomerEntity saveEntity = customerJpaRepository.save(customerEntity).block();
         return customerPersistenceMapper.toDomain(saveEntity);
+    }
+
+    @Override
+    public Mono<Customer> save2(Customer customer) {
+        return null;
     }
 }

@@ -15,7 +15,6 @@
               <build path="$PROJECT_DIR$/infrastructure" name="infrastructure">
                 <projects>
                   <project path="$PROJECT_DIR$/infrastructure" />
-                  <project path="$PROJECT_DIR$/infrastructure/api-gateway" />
                   <project path="$PROJECT_DIR$/infrastructure/config-server" />
                 </projects>
               </build>
@@ -68,6 +67,12 @@
               <build path="$PROJECT_DIR$/microservices/payment-service" name="payment-service">
                 <projects>
                   <project path="$PROJECT_DIR$/microservices/payment-service" />
+                  <project path="$PROJECT_DIR$/microservices/payment-service/payment-service-domain" />
+                  <project path="$PROJECT_DIR$/microservices/payment-service/payment-service-domain/payment-application-service" />
+                  <project path="$PROJECT_DIR$/microservices/payment-service/payment-service-domain/payment-domain-core" />
+                  <project path="$PROJECT_DIR$/microservices/payment-service/payment-service-main" />
+                  <project path="$PROJECT_DIR$/microservices/payment-service/payment-service-persistence" />
+                  <project path="$PROJECT_DIR$/microservices/payment-service/payment-service-restapi" />
                 </projects>
               </build>
             </builds>
@@ -79,7 +84,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/infrastructure" />
-            <option value="$PROJECT_DIR$/infrastructure/api-gateway" />
             <option value="$PROJECT_DIR$/infrastructure/config-server" />
             <option value="$PROJECT_DIR$/istad-common" />
             <option value="$PROJECT_DIR$/istad-common/istad-common-domain" />
@@ -108,6 +112,12 @@
             <option value="$PROJECT_DIR$/microservices/order-service/order-service-persistence" />
             <option value="$PROJECT_DIR$/microservices/order-service/order-service-restapi" />
             <option value="$PROJECT_DIR$/microservices/payment-service" />
+            <option value="$PROJECT_DIR$/microservices/payment-service/payment-service-domain" />
+            <option value="$PROJECT_DIR$/microservices/payment-service/payment-service-domain/payment-application-service" />
+            <option value="$PROJECT_DIR$/microservices/payment-service/payment-service-domain/payment-domain-core" />
+            <option value="$PROJECT_DIR$/microservices/payment-service/payment-service-main" />
+            <option value="$PROJECT_DIR$/microservices/payment-service/payment-service-persistence" />
+            <option value="$PROJECT_DIR$/microservices/payment-service/payment-service-restapi" />
           </set>
         </option>
         <option name="myGradleHome" value="" />

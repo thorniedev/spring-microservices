@@ -8,6 +8,7 @@ persistence:
 spring:
   application:
     name: customer-service
+
   mongodb:
     uri: mongodb://mongo:admin@localhost:27018/db_customer?authSource=admin
     host: localhost
@@ -23,9 +24,6 @@ spring:
     url: r2dbc:postgresql://localhost:5432/app_db
     username: admin
     password: postgres@123456789
-
-
-
 
 
 #  datasource:

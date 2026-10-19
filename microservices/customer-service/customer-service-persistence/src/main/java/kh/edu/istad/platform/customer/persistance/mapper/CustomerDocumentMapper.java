@@ -24,4 +24,5 @@ public interface CustomerDocumentMapper
     default UUID toUuid(CustomerId id) {
         return id != null ? id.value() : null;
     }
+
 }

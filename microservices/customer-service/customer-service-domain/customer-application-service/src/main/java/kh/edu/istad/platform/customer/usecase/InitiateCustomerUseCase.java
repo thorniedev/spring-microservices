@@ -8,6 +8,7 @@ import kh.edu.istad.platform.customer.service.CustomerDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ public class InitiateCustomerUseCase
     private final CustomerDomainService customerDomainService;
     private final CustomerRepository customerRepository; // dependency point inward (D principle)
 
-    public InitiateCustomerResult execute(InitiateCustomerCommand command)
+    public Mono<InitiateCustomerResult> execute(InitiateCustomerCommand command)
     {
         log.info("Initiate Customer UseCase: {}", command);
 
@@ -44,16 +45,26 @@ public class InitiateCustomerUseCase
         customerDomainService.initiateCustomer(customer);
 
         // save to database through outbound port (Persistence adapter)
-        Customer savedCustomer = customerRepository.save(customer);
+        // Customer savedCustomer = customerRepository.save2(customer);
 
         // return result with generated customer ID
-        return new InitiateCustomerResult(
-                savedCustomer.getId().value(),
-                savedCustomer.getUsername(),
-                savedCustomer.getFamilyName(),
-                savedCustomer.getGivenName(),
-                savedCustomer.getEmail(),
-                savedCustomer.getPhoneNumber()
-                );
+//        return new InitiateCustomerResult(
+//                savedCustomer.getId().value(),
+//                savedCustomer.getUsername(),
+//                savedCustomer.getFamilyName(),
+//                savedCustomer.getGivenName(),
+//                savedCustomer.getEmail(),
+//                savedCustomer.getPhoneNumber()
+//                );
+
+        return customerRepository.save2(customer)
+                .map(savedCustomer -> new InitiateCustomerResult(
+                        savedCustomer.getId().value(),
+                        savedCustomer.getUsername(),
+                        savedCustomer.getFamilyName(),
+                        savedCustomer.getGivenName(),
+                        savedCustomer.getEmail(),
+                        savedCustomer.getPhoneNumber()
+                ));
     }
 }
