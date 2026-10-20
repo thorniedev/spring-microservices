@@ -9,7 +9,6 @@ dependencies {
     implementation 'kh.edu.istad:order-service-restapi'
     implementation 'kh.edu.istad:istad-common-restapi'
 
-    implementation libs.spring.boot.starter.webmvc
-    testImplementation libs.spring.boot.starter.webmvc.test
-    testRuntimeOnly libs.junit.platform.launcher
+    implementation libs.spring.boot.starter.webflux
+    testImplementation libs.spring.boot.starter.webflux.test
 }

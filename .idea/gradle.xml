@@ -15,6 +15,7 @@
               <build path="$PROJECT_DIR$/infrastructure" name="infrastructure">
                 <projects>
                   <project path="$PROJECT_DIR$/infrastructure" />
+                  <project path="$PROJECT_DIR$/infrastructure/api-gateway" />
                   <project path="$PROJECT_DIR$/infrastructure/config-server" />
                 </projects>
               </build>
@@ -84,6 +85,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/infrastructure" />
+            <option value="$PROJECT_DIR$/infrastructure/api-gateway" />
             <option value="$PROJECT_DIR$/infrastructure/config-server" />
             <option value="$PROJECT_DIR$/istad-common" />
             <option value="$PROJECT_DIR$/istad-common/istad-common-domain" />

@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {
-        "kh.edu.istad.platform.order",
-        "kh.istad.istad.common.restapi"
-})
+//@ComponentScan(basePackages = {
+//        "kh.edu.istad.platform.order",
+//        "kh.istad.istad.common.restapi"
+//})
 public class OrderServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(OrderServiceApplication.class, args);

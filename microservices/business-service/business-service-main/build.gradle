@@ -9,7 +9,7 @@ dependencies {
     implementation 'kh.edu.istad:business-service-restapi'
     implementation 'kh.edu.istad:istad-common-restapi'
 
-    implementation libs.spring.starter.webflux
+    implementation libs.spring.boot.starter.webflux
     implementation libs.spring.boot.starter.data.mongodb.reactive
     testImplementation libs.spring.boot.starter.webflux.test
     testRuntimeOnly libs.junit.platform.launcher

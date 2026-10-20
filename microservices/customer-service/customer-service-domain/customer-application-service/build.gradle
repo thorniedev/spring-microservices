@@ -5,6 +5,5 @@ plugins {
 dependencies {
      api 'kh.edu.istad:customer-domain-core'
 
-     // Reactor
-    implementation libs.spring.project.reactor
+    implementation libs.reactor.core // Project Reactor
 }

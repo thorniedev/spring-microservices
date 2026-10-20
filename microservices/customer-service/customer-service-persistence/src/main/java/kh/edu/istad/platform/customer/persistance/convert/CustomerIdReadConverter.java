@@ -1,22 +1,24 @@
 package kh.edu.istad.platform.customer.persistance.convert;
 
 import kh.edu.istad.common.domain.valueobject.CustomerId;
-import org.bson.Document;
 import org.jspecify.annotations.NonNull;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.convert.ReadingConverter;
 
 import java.util.UUID;
 
-public class CustomerIdReadConverter implements Converter<Document, CustomerId> {
+@ReadingConverter
+public class CustomerIdReadConverter implements Converter<String, CustomerId>{
+
     @Override
-    public CustomerId convert(Document source) {
-        return new CustomerId(UUID.fromString(source.getString("_id")));
+    public CustomerId convert(@NonNull String source) {
+        return new CustomerId(UUID.fromString(source));
     }
-
-//    @Override
-//    public CustomerId convert(@NonNull UUID source) {
-//        //return new CustomerId(UUID.fromString(source.getString("_id").toString()));
-//        return new CustomerId(source);
-//    }
-
 }
+
+//public class CustomerIdReadConverter implements Converter<Document, CustomerId> {
+//    @Override
+//    public CustomerId convert(Document source) {
+//        return new CustomerId(UUID.fromString(source.getString("_id")));
+//    }
+//}

@@ -8,6 +8,7 @@ dependencies {
     api project(':istad-common-domain')
 
     // Provides @RestControllerAdvice, @ExceptionHandler, and WebExchangeBindException
+    testImplementation libs.spring.boot.starter.webmvc.test
     compileOnly libs.spring.boot.starter.webmvc
 
     compileOnly libs.spring.boot.starter.validation

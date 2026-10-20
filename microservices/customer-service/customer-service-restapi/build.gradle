@@ -6,9 +6,11 @@ dependencies {
 
     api 'kh.edu.istad:customer-application-service'
 
-    implementation libs.spring.boot.starter.webmvc
+    implementation libs.spring.boot.starter.webflux
+
+    implementation libs.reactor.core
 
     implementation libs.spring.boot.starter.validation
 
-    implementation libs.spring.boot.starter.webmvc.test
+    testImplementation libs.spring.boot.starter.webflux.test
 }

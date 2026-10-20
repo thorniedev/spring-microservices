@@ -7,7 +7,7 @@ dependencies {
     api 'kh.edu.istad:istad-common-restapi'
 
     // Reactive WebFlux
-    implementation libs.spring.starter.webflux
+    implementation libs.spring.boot.starter.webflux
     implementation libs.spring.boot.starter.validation
     testImplementation libs.spring.boot.starter.webflux.test
 }

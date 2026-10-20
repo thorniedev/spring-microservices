@@ -10,7 +10,6 @@ dependencies {
     implementation 'kh.edu.istad:customer-service-persistence'
     implementation 'kh.edu.istad:customer-service-restapi'
 
-    implementation libs.spring.boot.starter.webmvc
-    implementation libs.spring.boot.starter.webmvc.test
-    testRuntimeOnly libs.junit.platform.launcher
+    implementation libs.spring.boot.starter.webflux
+    implementation libs.spring.boot.starter.webflux.test
 }

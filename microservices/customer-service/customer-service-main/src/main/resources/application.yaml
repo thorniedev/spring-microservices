@@ -9,6 +9,10 @@ spring:
   application:
     name: customer-service
 
+  threads:
+    virtual:
+      enabled: true
+
   mongodb:
     uri: mongodb://mongo:admin@localhost:27018/db_customer?authSource=admin
     host: localhost
@@ -24,18 +28,3 @@ spring:
     url: r2dbc:postgresql://localhost:5432/app_db
     username: admin
     password: postgres@123456789
-
-
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/app_db
-#    username: admin
-#    password: postgres@123456789
-#    driver-class-name: org.postgresql.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    show-sql: true
-#    open-in-view: false
-#    properties:
-#      hibernate:
-#        format_sql: true
