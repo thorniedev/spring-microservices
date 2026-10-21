@@ -1,13 +1,15 @@
 package kh.edu.istad.platform.customer.restapi.controller;
 
+import jakarta.validation.Valid;
 import kh.edu.istad.platform.customer.dto.*;
-import kh.edu.istad.platform.customer.entity.Customer;
 import kh.edu.istad.platform.customer.restapi.dto.CustomerResponse;
+import kh.edu.istad.platform.customer.restapi.dto.CustomerUpdateRequest;
 import kh.edu.istad.platform.customer.usecase.InitiateCustomerUseCase;
 import kh.edu.istad.platform.customer.restapi.dto.CustomerInitiateRequest;
 import kh.edu.istad.platform.customer.restapi.dto.CustomerInitiateResponse;
 import kh.edu.istad.platform.customer.restapi.mapper.CustomerWebMapper;
 import kh.edu.istad.platform.customer.usecase.QueryCustomerUseCase;
+import kh.edu.istad.platform.customer.usecase.UpdateCustomerUserCase;
 import kh.edu.istad.platform.customer.valueobject.CustomerStatus;
 import kh.edu.istad.platform.customer.valueobject.SegmentType;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class CustomerController {
     private final InitiateCustomerUseCase initiateCustomerUseCase;
     private final CustomerWebMapper customerWebMapper;
     private final QueryCustomerUseCase queryCustomerUseCase;
+    private final UpdateCustomerUserCase updateCustomerUserCase;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -43,11 +45,7 @@ public class CustomerController {
 
     }
 
-    @GetMapping
-    public Flux<Customer> getAllCustomers() {
-        return queryCustomerUseCase.findAll();
-    }
-
+    // READ All with Dynamic Filtering, Reactive Pagination & Sorting
     // Dynamic Filter with Reactive Pagination & Sorting
     public Mono<PaginatedResponse<CustomerResponse>> getCustomers(
             @RequestParam(required = false) String firstName,
@@ -80,6 +78,31 @@ public class CustomerController {
                 .map(customerWebMapper::toPaginatedResponse); // Replace it with mapToWebResponse
     }
 
+    // READ Single Customer By ID
+    @GetMapping("/{id}")
+    public Mono<CustomerResponse> getCustomerById(@PathVariable String id) {
+        return queryCustomerUseCase.findById(id)
+                .map(customerWebMapper::toResponse);
+    }
+
+    // UPDATE Customer
+    @PutMapping("/{id}")
+    public Mono<CustomerResponse> updateCustomer(
+            @PathVariable String id,
+            @Valid @RequestBody CustomerUpdateRequest request
+    ) {
+        UpdateCustomerCommand command = customerWebMapper.toCommand(request);
+        return updateCustomerUserCase.updateCustomer(id, command)
+                .map(customerWebMapper::toResponse);
+    }
+
+    // DELETE / Deactivate Customer (Soft Delete)
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Mono<Void> deactivateCustomer(@PathVariable String id) {
+        return updateCustomerUserCase.deactivateCustomer(id);
+    }
+
     // Reactive Status Statistics Aggregation
     @GetMapping(value = "/stastic", produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<CustomerStatusStatistic> getCustomerStatusStatistics() {
@@ -92,7 +115,7 @@ public class CustomerController {
         return queryCustomerUseCase.getCustomerStatusStatistics();
     }
 
-    // Reactive Customer Segment Performance Report Aggregation
+    // Reactive Customer Segment updateCustomerUserCasePerformance Report Aggregation
 
     @GetMapping(value = "/report", produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<CustomerSegmentReport> getCustomerSegmentReport() {

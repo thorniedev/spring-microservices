@@ -17,7 +17,7 @@ public class Customer extends AggreateRoot<CustomerId>
     private String familyName;
     private String givenName;
     private final String email;
-    private final String phoneNumber;
+    private String phoneNumber;
     private CustomerStatus status;
 
     // Added fields for Filter, Segment & Aggregations
@@ -28,15 +28,15 @@ public class Customer extends AggreateRoot<CustomerId>
 
 
     // Domain Critical Logic
-    public void initiateCustomer(){
-        validateCustomer();
+    public void initiateCustomer() {
+        validateCustomerForInitiation();
         super.setId(new CustomerId(UUID.randomUUID()));
-        status = CustomerStatus.ACTIVE;
+        this.status = CustomerStatus.ACTIVE;
         this.totalSpent = Money.ZERO;
         this.loyaltyPoints = 0;
     }
 
-    private void validateCustomer() {
+    private void validateCustomerForInitiation() {
         if (super.getId() != null) {
             throw new CustomerDomainException("Customer id must be null before initiation");
         }
@@ -44,21 +44,37 @@ public class Customer extends AggreateRoot<CustomerId>
             throw new CustomerDomainException("Customer status must be null before initiation");
         }
     }
+
     public void updateCustomer(String familyName, String givenName) {
-        if (familyName == null || givenName == null) {
-            throw new CustomerDomainException("Customer familyName and givenName must not be null");
+        if (familyName == null || familyName.isBlank() || givenName == null || givenName.isBlank()) {
+            throw new CustomerDomainException("Customer familyName and givenName must not be empty");
         }
         this.familyName = familyName;
         this.givenName = givenName;
     }
+    // 4-argument overload (used by UpdateCustomerUserCase)
+    public void updateCustomer(String familyName, String givenName, String phoneNumber, String segmentId) {
+        updateCustomer(familyName, givenName);
+        if (phoneNumber != null && !phoneNumber.isBlank()) {
+            this.phoneNumber = phoneNumber;
+        }
+        if (segmentId != null) {
+            this.segmentId = segmentId;
+        }
+    }
+
     public void deactivateCustomer() {
-        if (status != CustomerStatus.ACTIVE) {
+        if (this.status == CustomerStatus.INACTIVE) {
             throw new CustomerDomainException("Could not deactivate customer. Customer is already inactive");
         }
         this.status = CustomerStatus.INACTIVE;
     }
 
+    public void assignSegment(String segmentId) {
+        this.segmentId = segmentId;
+    }
 
+    // Constructors & Builder
     private Customer(Builder builder) {
         super.setId(builder.id);
         this.username = builder.username;
@@ -71,6 +87,7 @@ public class Customer extends AggreateRoot<CustomerId>
         this.loyaltyPoints = builder.loyaltyPoints != null ? builder.loyaltyPoints : 0;
         this.segmentId = builder.segmentId;
     }
+
     public static final class Builder {
         private CustomerId id;
         private String username;
@@ -82,6 +99,7 @@ public class Customer extends AggreateRoot<CustomerId>
         private Money totalSpent;
         private Integer loyaltyPoints;
         private String segmentId;
+
         private Builder() {}
         public static Builder builder() { return new Builder(); }
         public Builder id(CustomerId val) { id = val; return this; }
@@ -96,6 +114,7 @@ public class Customer extends AggreateRoot<CustomerId>
         public Builder segmentId(String val) { segmentId = val; return this; }
         public Customer build() { return new Customer(this); }
     }
+
     public String getUsername() { return username; }
     public String getFamilyName() { return familyName; }
     public String getGivenName() { return givenName; }
@@ -106,6 +125,7 @@ public class Customer extends AggreateRoot<CustomerId>
     public Integer getLoyaltyPoints() { return loyaltyPoints; }
     public String getSegmentId() { return segmentId; }
     public static Builder builder() { return Builder.builder(); }
+
 
 //    private void validateCustomer() {
 //        if (super.getId() != null) {

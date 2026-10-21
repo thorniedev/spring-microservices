@@ -12,13 +12,6 @@
                   <project path="$PROJECT_DIR$/build-logic" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/infrastructure" name="infrastructure">
-                <projects>
-                  <project path="$PROJECT_DIR$/infrastructure" />
-                  <project path="$PROJECT_DIR$/infrastructure/api-gateway" />
-                  <project path="$PROJECT_DIR$/infrastructure/config-server" />
-                </projects>
-              </build>
               <build path="$PROJECT_DIR$/istad-common" name="istad-common">
                 <projects>
                   <project path="$PROJECT_DIR$/istad-common" />
@@ -76,6 +69,13 @@
                   <project path="$PROJECT_DIR$/microservices/payment-service/payment-service-restapi" />
                 </projects>
               </build>
+              <build path="$PROJECT_DIR$/spring-cloud" name="spring-cloud">
+                <projects>
+                  <project path="$PROJECT_DIR$/spring-cloud" />
+                  <project path="$PROJECT_DIR$/spring-cloud/api-gateway" />
+                  <project path="$PROJECT_DIR$/spring-cloud/config-server" />
+                </projects>
+              </build>
             </builds>
           </compositeBuild>
         </compositeConfiguration>
@@ -84,9 +84,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/build-logic" />
-            <option value="$PROJECT_DIR$/infrastructure" />
-            <option value="$PROJECT_DIR$/infrastructure/api-gateway" />
-            <option value="$PROJECT_DIR$/infrastructure/config-server" />
             <option value="$PROJECT_DIR$/istad-common" />
             <option value="$PROJECT_DIR$/istad-common/istad-common-domain" />
             <option value="$PROJECT_DIR$/istad-common/istad-common-restapi" />
@@ -120,6 +117,9 @@
             <option value="$PROJECT_DIR$/microservices/payment-service/payment-service-main" />
             <option value="$PROJECT_DIR$/microservices/payment-service/payment-service-persistence" />
             <option value="$PROJECT_DIR$/microservices/payment-service/payment-service-restapi" />
+            <option value="$PROJECT_DIR$/spring-cloud" />
+            <option value="$PROJECT_DIR$/spring-cloud/api-gateway" />
+            <option value="$PROJECT_DIR$/spring-cloud/config-server" />
           </set>
         </option>
         <option name="myGradleHome" value="" />

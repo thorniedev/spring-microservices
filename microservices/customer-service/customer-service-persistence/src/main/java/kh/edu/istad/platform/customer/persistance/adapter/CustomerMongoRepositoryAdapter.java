@@ -1,10 +1,7 @@
 package kh.edu.istad.platform.customer.persistance.adapter;
 
 import kh.edu.istad.common.domain.valueobject.CustomerId;
-import kh.edu.istad.platform.customer.dto.CustomerFilterCriteria;
-import kh.edu.istad.platform.customer.dto.CustomerSegmentReport;
-import kh.edu.istad.platform.customer.dto.CustomerStatusStatistic;
-import kh.edu.istad.platform.customer.dto.PaginatedResponse;
+import kh.edu.istad.platform.customer.dto.*;
 import kh.edu.istad.platform.customer.entity.Customer;
 import kh.edu.istad.platform.customer.entity.CustomerSegment;
 import kh.edu.istad.platform.customer.persistance.document.CustomerDocument;
@@ -91,7 +88,19 @@ public class CustomerMongoRepositoryAdapter implements CustomerRepository{
                 });
     }
 
-    // CustomerSegment Lookups (Manual Reference)
+    // CustomerSegment CRUD
+    @Override
+    public Mono<CustomerSegment> saveSegment(CustomerSegment segment) {
+        return customerSegmentMongoRepository.save(customerDocumentMapper.toSegmentDocument(segment))
+                .map(customerDocumentMapper::toSegmentDomain);
+    }
+
+    @Override
+    public Flux<CustomerSegment> findAllSegments() {
+        return customerSegmentMongoRepository.findAll()
+                .map(customerDocumentMapper::toSegmentDomain);
+    }
+
     @Override
     public Mono<CustomerSegment> findSegmentById(String segmentId) {
         return customerSegmentMongoRepository.findById(segmentId)
@@ -104,6 +113,11 @@ public class CustomerMongoRepositoryAdapter implements CustomerRepository{
                 .map(customerDocumentMapper::toSegmentDomain);
     }
 
+    @Override
+    public Mono<Void> deleteSegmentById(String segmentId) {
+        return customerSegmentMongoRepository.deleteById(segmentId);
+    }
+
     // Aggregation Endpoints Implementation
     @Override
     public Flux<CustomerStatusStatistic> aggregateCustomerStatusStatistics() {
@@ -113,6 +127,11 @@ public class CustomerMongoRepositoryAdapter implements CustomerRepository{
     @Override
     public Flux<CustomerSegmentReport> aggregateCustomerSegmentReport() {
         return customerMongoRepository.aggregateCustomerSegmentReport();
+    }
+
+    @Override
+    public Flux<CustomerStatusAndSegmentStatistic> aggregateCustomerStatusAndSegmentStatistics(){
+        return customerMongoRepository.aggregateCustomerStatusAndSegmentStatistics();
     }
 
     /**

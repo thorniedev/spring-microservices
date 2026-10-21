@@ -9,15 +9,24 @@ import java.util.List;
 
 public class CustomerSegment extends BaseEntity<String> {
 
-    private final SegmentType segmentType;
-    private final List<String> benefits;
-    private final Integer minPoints;
-    private final Money minSpend;
-    private final BigDecimal discountRate;
+    private SegmentType segmentType;
+    private List<String> benefits;
+    private Integer minPoints;
+    private Money minSpend;
+    private BigDecimal discountRate;
 
     public CustomerSegment(String id, SegmentType segmentType, List<String> benefits,
                            Integer minPoints, Money minSpend, BigDecimal discountRate) {
         super.setId(id);
+        this.segmentType = segmentType;
+        this.benefits = benefits != null ? List.copyOf(benefits) : List.of();
+        this.minPoints = minPoints != null ? minPoints : 0;
+        this.minSpend = minSpend != null ? minSpend : Money.ZERO;
+        this.discountRate = discountRate != null ? discountRate : BigDecimal.ZERO;
+    }
+
+    public void updateSegment(SegmentType segmentType, List<String> benefits,
+                              Integer minPoints, Money minSpend, BigDecimal discountRate) {
         this.segmentType = segmentType;
         this.benefits = benefits != null ? List.copyOf(benefits) : List.of();
         this.minPoints = minPoints != null ? minPoints : 0;

@@ -25,15 +25,29 @@ public interface CustomerRepository
     Mono<Customer> findByUsername(String username);
 
     // Dynamic Filter with Reactive Pagination
-    Mono<PaginatedResponse<Customer>>  findByDynamicFilter(CustomerFilterCriteria criteria);
+    Mono<PaginatedResponse<Customer>> findByDynamicFilter(CustomerFilterCriteria criteria);
 
     // Manual Reference Lookup for Segments
     Mono<CustomerSegment> findSegmentById(String segmentId);
     Flux<CustomerSegment> findSegmentsByIds(Set<String> segmentIds);
 
+    default Mono<CustomerSegment> saveSegment(CustomerSegment segment) {
+        return Mono.empty();
+    }
+    default Flux<CustomerSegment> findAllSegments() {
+        return Flux.empty();
+    }
+    default Mono<Void> deleteSegmentById(String segmentId) {
+        return Mono.empty();
+    }
+
     // Aggregations
     Flux<CustomerStatusStatistic> aggregateCustomerStatusStatistics();
 
     Flux<CustomerSegmentReport> aggregateCustomerSegmentReport();
+
+    default Flux<CustomerStatusAndSegmentStatistic> aggregateCustomerStatusAndSegmentStatistics() {
+        return Flux.empty();
+    }
 
 }

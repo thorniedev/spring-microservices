@@ -1,10 +1,7 @@
 package kh.edu.istad.platform.customer.persistance.repository;
 
+import kh.edu.istad.platform.customer.dto.*;
 import kh.edu.istad.platform.customer.persistance.document.CustomerDocument;
-import kh.edu.istad.platform.customer.dto.CustomerFilterCriteria;
-import kh.edu.istad.platform.customer.dto.CustomerSegmentReport;
-import kh.edu.istad.platform.customer.dto.CustomerStatusStatistic;
-import kh.edu.istad.platform.customer.dto.PaginatedResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +31,6 @@ public class CustomerMongoRepositoryImpl implements CustomerMongoRepositoryCusto
         Criteria filterCriteria = buildFilterCriteria(criteria);
         Query contentQuery = new Query(filterCriteria).with(pageable);
         Query countQuery = new Query(filterCriteria);
-        // Execute count & content queries reactively in parallel via Mono.zip
         Mono<List<CustomerDocument>> contentMono = reactiveMongoTemplate.find(contentQuery, CustomerDocument.class).collectList();
         Mono<Long> countMono = reactiveMongoTemplate.count(countQuery, CustomerDocument.class);
         return Mono.zip(contentMono, countMono)
@@ -102,21 +98,36 @@ public class CustomerMongoRepositoryImpl implements CustomerMongoRepositoryCusto
     @Override
     public Flux<CustomerSegmentReport> aggregateCustomerSegmentReport() {
         Aggregation aggregation = newAggregation(
-                // 1. Join with customer_segments collection
                 lookup("customer_segments", "segment_id", "_id", "segmentInfo"),
                 unwind("segmentInfo", true),
-                // 2. Group by resolved Segment Type
                 group("segmentInfo.segment_type")
                         .count().as("totalCount")
                         .sum("total_spent").as("totalRevenue")
                         .avg("loyalty_points").as("averagePoints")
                         .max("total_spent").as("maxPurchaseAmount")
                         .min("total_spent").as("minPurchaseAmount"),
-                // 3. Project fields into DTO
                 project("totalCount", "totalRevenue", "averagePoints", "maxPurchaseAmount", "minPurchaseAmount")
                         .and("_id").as("segmentType"),
                 sort(Sort.Direction.DESC, "totalRevenue")
         );
         return reactiveMongoTemplate.aggregate(aggregation, "customers", CustomerSegmentReport.class);
+    }
+
+
+    @Override
+    public Flux<CustomerStatusAndSegmentStatistic> aggregateCustomerStatusAndSegmentStatistics() {
+        Aggregation aggregation = newAggregation(
+                lookup("customer_segments", "segment_id", "_id", "segmentInfo"),
+                unwind("segmentInfo", true),
+                group("status", "segmentInfo.segment_type")
+                        .count().as("totalCustomers")
+                        .sum("total_spent").as("totalSpent")
+                        .avg("total_spent").as("averageSpent"),
+                project("totalCustomers", "totalSpent", "averageSpent")
+                        .and("_id.status").as("status")
+                        .and("_id.segment_type").as("segmentType"),
+                sort(Sort.Direction.DESC, "totalCustomers")
+        );
+        return reactiveMongoTemplate.aggregate(aggregation, "customers", CustomerStatusAndSegmentStatistic.class);
     }
 }

@@ -12,6 +12,7 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING) //unmappedTargetPolicy = ReportingPolicy.IGNORE
@@ -43,7 +44,11 @@ public interface CustomerDocumentMapper
         if (value == null) {
             return null;
         }
-        return new CustomerId(UUID.fromString(value));
+        try {
+            return new CustomerId(UUID.fromString(value));
+        } catch (IllegalArgumentException e) {
+            return new CustomerId(UUID.nameUUIDFromBytes(value.getBytes(StandardCharsets.UTF_8)));
+        }
     }
     default String mapCustomerIdToString(CustomerId customerId) {
         if (customerId == null || customerId.value() == null) {
