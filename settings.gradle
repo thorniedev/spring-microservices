@@ -36,4 +36,6 @@ includeBuild 'spring-cloud'
 //include 'microservices:payment-service:payment-service-main'
 //include 'microservices:payment-service:payment-service-domain:payment-domain-core'
 //include 'microservices:payment-service:payment-service-domain:payment-application-service'
-//include 'infrastructure:config-server'
+//include 'spring-cloud:config-server'
+
+includeBuild 'authorization-server'

@@ -1,7 +1,6 @@
 package kh.edu.istad.platform.customer.restapi.mapper;
 
 import kh.edu.istad.platform.customer.dto.*;
-import kh.edu.istad.platform.customer.entity.Customer;
 import kh.edu.istad.platform.customer.restapi.dto.*;
 import kh.edu.istad.platform.customer.valueobject.Email;
 import kh.edu.istad.platform.customer.valueobject.PhoneNumber;
@@ -20,15 +19,12 @@ public interface CustomerWebMapper
     PaginatedResponse <CustomerResponse> toPaginatedResponse(PaginatedResponse<CustomerResult> paginatedResult);
 
     UpdateCustomerCommand toCommand(CustomerUpdateRequest request);
-
     CustomerSegmentCommand toCommand(CustomerSegmentRequest request);
-
     CustomerSegmentResponse toResponse(CustomerSegmentResult result);
 
     default Email mapEmail(String email) {
         return new Email(email);
     }
-
     default PhoneNumber mapPhoneNumber(String phoneNumber) {
         return new PhoneNumber(phoneNumber);
     }

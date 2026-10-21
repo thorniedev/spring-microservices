@@ -11,6 +11,7 @@ mapstruct-binding = "0.2.0"
 dependencyManagement = "1.1.7"
 junitPlatform = "1.11.4"
 
+
 [libraries]
 lombok = {module = "org.projectlombok:lombok", version.ref = "lombok"}
 
@@ -47,6 +48,9 @@ spring-cloud-gateway = { module = "org.springframework.cloud:spring-cloud-starte
 
 # Boot-4 BOM for all services
 spring-boot4-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBoot"}
+
+# Oauth-2.0
+spring-boot-starter-authorization-server = { module = "org.springframework.security:spring-security-oauth2-authorization-server" }
 
 [bundles]
 spring-base = [
