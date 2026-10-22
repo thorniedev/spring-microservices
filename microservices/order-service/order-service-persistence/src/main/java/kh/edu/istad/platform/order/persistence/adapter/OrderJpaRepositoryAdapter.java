@@ -5,7 +5,7 @@ import kh.edu.istad.platform.order.entity.Order;
 import kh.edu.istad.platform.order.persistence.entity.OrderEntity;
 import kh.edu.istad.platform.order.persistence.mapper.OrderPersistenceMapper;
 import kh.edu.istad.platform.order.persistence.repository.OrderJpaRepository;
-import kh.edu.istad.platform.order.port.out.OrderRepository;
+import kh.edu.istad.platform.order.domain.port.out.OrderRepository;
 import kh.edu.istad.platform.order.valueobject.TrackingId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

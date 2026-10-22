@@ -10,12 +10,20 @@ public class Business extends AggreateRoot<BusinessId> {
     private final List<Product> products;
     private boolean active;
 
+    // Constructor
+    public Business(List<Product> products, boolean active) {
+        this.products = products;
+        this.active = active;
+    }
+
+    // Constructor
     private Business(Builder builder) {
         super.setId(builder.businessId);
         this.products = builder.products;
         this.active = builder.active;
     }
 
+    // Getters
     public List<Product> getProducts() {
         return products;
     }
@@ -36,4 +44,5 @@ public class Business extends AggreateRoot<BusinessId> {
         public Builder active(boolean val) { active = val; return this; }
         public Business build() { return new Business(this); }
     }
+
 }

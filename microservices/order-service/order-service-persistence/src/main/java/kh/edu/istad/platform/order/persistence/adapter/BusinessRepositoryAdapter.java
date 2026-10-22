@@ -1,7 +1,7 @@
 package kh.edu.istad.platform.order.persistence.adapter;
 
 import kh.edu.istad.platform.order.entity.Business;
-import kh.edu.istad.platform.order.port.out.BusinessRepository;
+import kh.edu.istad.platform.order.domain.port.out.BusinessRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

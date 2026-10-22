@@ -33,11 +33,42 @@ public record Money(
         return input.setScale(2, RoundingMode.HALF_EVEN);
     }
 
-//    public void isGreaterThanZero() {
-//        if (!(amount.compareTo(BigDecimal.ZERO) > 0)){
-//            System.out.println("Money is not greater than zero");
-//            throw new RuntimeException("Money is not greater than zero");
-//        }
-//    }
-    // More logic
+    /**
+     * Logic for Money
+     * Code from a professor: Chan Chhiya
+     * */
+
+    /*
+    public boolean isGreaterThanZero() {
+        return this.amount != null && this.amount.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    // Compare to money
+    public boolean isGreaterThan(Money money){
+        return this.amount != null && this.amount.compareTo(money.amount()) > 0;
+    }
+
+    // Add money
+    public Money add(Money money){
+        BigDecimal newAmount = this.amount.add(money.amount);
+
+        return new Money(newAmount);
+    }
+
+    private BigDecimal setScale(BigDecimal inputAmount){
+        return inputAmount.setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+    // Subtract money
+    public Money subtract(Money money) {
+        BigDecimal newAmount = this.amount.subtract(money.amount);
+        return new Money(newAmount);
+    }
+
+    // multiply
+    public Money multiply(int multiplier) {
+        BigDecimal newAmount = this.amount.multiply(BigDecimal.valueOf(multiplier));
+        return new Money(newAmount);
+    }
+    */
 }
