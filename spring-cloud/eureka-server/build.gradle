@@ -1,0 +1,12 @@
+plugins {
+    id 'spring-cloud-conventions'
+    id 'application'
+}
+
+application {
+    mainClass = 'kh.edu.istad.platform.cloud.eureka.EurekaServerApplication'
+}
+
+dependencies {
+    implementation libs.spring.cloud.starter.eureka.server
+}

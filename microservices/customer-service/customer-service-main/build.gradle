@@ -2,6 +2,14 @@ plugins {
     id 'spring-boot-common-conventions'
 }
 
+def catalog = project.extensions.getByType(VersionCatalogsExtension).named("libs")
+
+dependencyManagement {
+    imports {
+        mavenBom catalog.findLibrary('spring-cloud-bom').get().get().toString()
+    }
+}
+
 dependencies {
 
     implementation 'kh.edu.istad:customer-domain-core'
@@ -12,4 +20,8 @@ dependencies {
 
     implementation libs.spring.boot.starter.webflux
     implementation libs.spring.boot.starter.webflux.test
+
+    // Eureka Client & Load Balancer
+    implementation libs.spring.cloud.starter.eureka.client
+    implementation libs.spring.cloud.starter.loadbalancer
 }

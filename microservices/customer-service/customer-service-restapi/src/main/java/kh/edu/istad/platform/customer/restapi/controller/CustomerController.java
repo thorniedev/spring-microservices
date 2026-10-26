@@ -13,6 +13,8 @@ import kh.edu.istad.platform.customer.usecase.UpdateCustomerUserCase;
 import kh.edu.istad.platform.customer.valueobject.CustomerStatus;
 import kh.edu.istad.platform.customer.valueobject.SegmentType;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +23,17 @@ import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/customers")
+@RequestMapping({"/api/customers", "/api/v1/customers"})
 public class CustomerController {
 
     private final InitiateCustomerUseCase initiateCustomerUseCase;
     private final CustomerWebMapper customerWebMapper;
     private final QueryCustomerUseCase queryCustomerUseCase;
     private final UpdateCustomerUserCase updateCustomerUserCase;
+    private final Environment environment;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -81,6 +85,8 @@ public class CustomerController {
     // READ Single Customer By ID
     @GetMapping("/{id}")
     public Mono<CustomerResponse> getCustomerById(@PathVariable String id) {
+        String port = environment.getProperty("server.port", "unknown");
+        log.info(">>> Handling request on PORT {} for customer id: {}", port, id);
         return queryCustomerUseCase.findById(id)
                 .map(customerWebMapper::toResponse);
     }

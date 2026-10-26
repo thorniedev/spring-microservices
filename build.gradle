@@ -1,3 +1,13 @@
 plugins {
     id 'base'
 }
+
+tasks.register('compileJava', Exec) {
+    description = 'Compile Java across all microservices and eureka server'
+    commandLine './gradlew',
+        ':spring-cloud:eureka-server:compileJava',
+        ':microservices:customer-service:customer-service-main:compileJava',
+        ':microservices:business-service:business-service-main:compileJava',
+        ':microservices:order-service:order-service-main:compileJava',
+        ':microservices:payment-service:payment-service-main:compileJava'
+}

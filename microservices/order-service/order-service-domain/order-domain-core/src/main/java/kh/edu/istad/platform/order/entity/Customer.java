@@ -9,6 +9,10 @@ public class Customer extends AggreateRoot<CustomerId> {
     private final String familyName;
     private final String givenName;
 
+    public Customer(CustomerId customerId) {
+        this(customerId, null, null, null);
+    }
+
     public Customer (CustomerId customerId, String username, String familyName, String givenName){
         this.username = username;
         this.familyName = familyName;
